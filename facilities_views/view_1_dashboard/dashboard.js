@@ -1,1 +1,0 @@
-facilities/view1dashboard
