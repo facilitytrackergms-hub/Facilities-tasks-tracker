@@ -21,7 +21,11 @@
 </div>
 
 <script type="module">
-    import { supabase } from '../../global_engine/supabaseClient.js';
+    // Change this:
+import { supabase } from '/global_engine/supabaseClient.js';
+
+// To this:
+import { supabase } from '../global_engine/supabaseClient.js';
     
     let imageFile = null;
     const preview = document.getElementById('facility-image-preview');
