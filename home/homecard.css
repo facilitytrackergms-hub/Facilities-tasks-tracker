@@ -1,11 +1,24 @@
-.card {
-    border: 2px solid #333;
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    margin: 20px auto;
-    background-color: #f4f4f4;
+/* Purpose: Professional Button Styling | Location: /home/homecard.css */
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px; /* Makes the edges round */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Adds depth */
+    transition: all 0.3s ease; /* Smooth animation */
 }
-h1 { color: #2c3e50; }
-button { background: #3498db; color: white; padding: 10px; border: none; cursor: pointer; }
+
+button:hover {
+    background-color: #2980b9;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.2); /* Lift effect on hover */
+    transform: translateY(-2px); /* Button pushes up slightly */
+}
+
+button:active {
+    transform: translateY(0); /* Press effect */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
