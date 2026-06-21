@@ -5,12 +5,14 @@ export async function loadView(viewName) {
     const container = document.getElementById('main-container');
     const folder = viewName.toLowerCase();
 
-    // Use relative pathing: ./ folder / filename
-    const response = await fetch(`./${folder}/${folder}card.html`);
+    // Remove the leading '.' so it resolves correctly within the repo
+    const response = await fetch(`${folder}/${folder}card.html`);
+    if (!response.ok) throw new Error(`Not Found: ${folder}/${folder}card.html`);
+    
     container.innerHTML = await response.text();
 
     const components = container.querySelectorAll('[data-component]');
     components.forEach(comp => {
-        loadComponent(`./${folder}/${comp.dataset.component}.html`, comp.id);
+        loadComponent(`${folder}/${comp.dataset.component}.html`, comp.id);
     });
 }
