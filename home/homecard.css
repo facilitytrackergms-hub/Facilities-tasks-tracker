@@ -1,4 +1,7 @@
-/* Purpose: Styles for Card and Modal | Location: /home/homecard.css */
+/* -------------------------------------------------------------------------- */
+/* Purpose: Styles for Card and Modal | Location: Facilities-tasks-tracker/home/homecard.css */
+/* -------------------------------------------------------------------------- */
+
 .card {
     border: 2px solid #333;
     padding: 20px;
@@ -34,3 +37,7 @@
     border-radius: 10px;
     text-align: center;
 }
+
+/* -------------------------------------------------------------------------- */
+/* Purpose: Styles for Card and Modal | Location: Facilities-tasks-tracker/home/homecard.css */
+/* -------------------------------------------------------------------------- */
