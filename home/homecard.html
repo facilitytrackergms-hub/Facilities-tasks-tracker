@@ -1,5 +1,13 @@
 <link rel="stylesheet" href="./home/homecard.css">
 <div class="card">
-    <h1>Welcome Home</h1>
-    <div id="button-container" data-component="add_facilities_button"></div>
+    <div class="home-page-title">FACILITY HOMES</div>
+    <button id="btn-create-facility" class="primary-btn">Create New Facility</button>
+    <div id="facilities-grid" class="facilities-grid" data-component="facilities_list"></div>
+    <div id="modal-container" data-component="create_facility_modal"></div>
 </div>
+
+<script>
+    document.getElementById('btn-create-facility').addEventListener('click', () => {
+        document.getElementById('facility-modal-backdrop').style.display = 'flex';
+    });
+</script>
