@@ -1,11 +1,16 @@
-// Purpose: Load component | Location: /js/main.js
+// Purpose: Load component into container | Location: /js/main.js
 async function loadComponent(url, elementId) {
     try {
-        // Use a leading slash to ensure it looks at the root of your repository
-        const response = await fetch('/Views/button.html'); 
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const text = await response.text();
         document.getElementById(elementId).innerHTML = text;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error loading component:', error);
     }
 }
+
+// Ensure the code runs after the page is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    loadComponent('./Views/button.html', 'main-container');
+});
