@@ -12,7 +12,8 @@
 
 <script>
     document.getElementById('btn-create-facility').addEventListener('click', () => {
-        document.getElementById('facility-modal-backdrop').style.display = 'flex';
+        const modal = document.getElementById('facility-modal-backdrop');
+        if (modal) modal.style.display = 'flex';
     });
 </script>
 
