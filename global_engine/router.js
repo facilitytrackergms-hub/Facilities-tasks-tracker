@@ -1,16 +1,16 @@
-// File: /global_engine/router.js
+// Purpose: Path Correction | Location: /global_engine/router.js
+import { loadComponent } from './component_loader.js';
+
 export async function loadView(viewName) {
     const container = document.getElementById('main-container');
     const folder = viewName.toLowerCase();
 
-    // Use absolute paths from the root
-    const response = await fetch(`/${folder}/${folder}card.html`);
-    const html = await response.text();
-    container.innerHTML = html;
+    // Use relative pathing: ./ folder / filename
+    const response = await fetch(`./${folder}/${folder}card.html`);
+    container.innerHTML = await response.text();
 
     const components = container.querySelectorAll('[data-component]');
     components.forEach(comp => {
-        // Ensure this path matches your folder structure exactly
-        loadComponent(`/${folder}/${comp.dataset.component}.html`, comp.id);
+        loadComponent(`./${folder}/${comp.dataset.component}.html`, comp.id);
     });
 }
