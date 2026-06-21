@@ -1,5 +1,6 @@
-// File Name: router.js
-// GitHub Path: Facilities-tasks-tracker/global_engine/router.js
+/* -------------------------------------------------------------------------- */
+/* Purpose: router.js | Location: Facilities-tasks-tracker/global_engine */
+/* -------------------------------------------------------------------------- */
 
 import { loadComponent } from './component_loader.js';
 
@@ -7,8 +8,8 @@ export async function loadView(viewName) {
     const container = document.getElementById('main-container');
     const folder = viewName.toLowerCase();
 
-    const response = await fetch(`../${folder}/${folder}card.html`);
-    if (!response.ok) throw new Error(`Not Found: ../${folder}/${folder}card.html`);
+    const response = await fetch(`/Facilities-tasks-tracker/${folder}/${folder}card.html`);
+    if (!response.ok) throw new Error(`Not Found: /Facilities-tasks-tracker/${folder}/${folder}card.html`);
     
     container.innerHTML = await response.text();
 
@@ -17,3 +18,7 @@ export async function loadView(viewName) {
         loadComponent(`${folder}/${comp.dataset.component}.html`, comp.id);
     });
 }
+
+/* -------------------------------------------------------------------------- */
+/* Purpose: router.js | Location: Facilities-tasks-tracker/global_engine */
+/* -------------------------------------------------------------------------- */
