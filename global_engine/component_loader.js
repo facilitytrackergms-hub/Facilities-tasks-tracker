@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Purpose: component_loader.js | Location: Facilities-tasks-tracker/global_engine */
+/* Purpose: component_loader.js | Location: Facilities-tasks-tracker/global_engine/component_loader.js */
 /* -------------------------------------------------------------------------- */
 
 export async function loadComponent(path, targetElementId) {
@@ -7,6 +7,7 @@ export async function loadComponent(path, targetElementId) {
     if (!targetElement) return;
 
     try {
+        // Use absolute path from repository root
         const response = await fetch(`/Facilities-tasks-tracker/${path}`);
         if (!response.ok) throw new Error(`Failed to load: ${path}`);
         
@@ -32,5 +33,5 @@ export async function loadComponent(path, targetElementId) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Purpose: component_loader.js | Location: Facilities-tasks-tracker/global_engine */
+/* Purpose: component_loader.js | Location: Facilities-tasks-tracker/global_engine/component_loader.js */
 /* -------------------------------------------------------------------------- */
