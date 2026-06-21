@@ -1,1 +1,9 @@
-
+/* Purpose: Basic Card Styling | Location: /styles/main.css */
+.card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    min-height: 200px;
+    background-color: #f9f9f9;
+}
