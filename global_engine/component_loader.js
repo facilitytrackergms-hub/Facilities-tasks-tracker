@@ -1,11 +1,11 @@
-// Purpose: Export Fix | Location: /global_engine/component_loader.js
+// Purpose: Path Correction and Execution Fix | Location: /global_engine/component_loader.js
 
 export async function loadComponent(path, targetElementId) {
     const targetElement = document.getElementById(targetElementId);
     if (!targetElement) return;
 
     try {
-        const response = await fetch(`./${path}`);
+        const response = await fetch(path);
         if (!response.ok) throw new Error(`Failed to load: ${path}`);
         
         const html = await response.text();
@@ -17,7 +17,7 @@ export async function loadComponent(path, targetElementId) {
             if (oldScript.src) {
                 newScript.src = oldScript.src;
             } else {
-                newScript.textContent = `(function() { ${oldScript.textContent} })();`;
+                newScript.textContent = oldScript.textContent;
             }
             newScript.async = false;
             document.body.appendChild(newScript);
