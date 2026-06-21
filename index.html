@@ -7,6 +7,9 @@
 </head>
 <body>
     <div id="main-container"></div>
-    <script type="module" src="global_engine/router.js"></script>
+    <script type="module">
+        import { loadView } from './global_engine/router.js';
+        loadView('Home');
+    </script>
 </body>
 </html>
