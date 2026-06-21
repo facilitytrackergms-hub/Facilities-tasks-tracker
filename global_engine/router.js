@@ -1,22 +1,21 @@
-// Purpose: Router Engine | Location: /global_engine/router.js
+// Purpose: Scalable Router Engine | Location: /global_engine/router.js
 import { loadComponent } from './component_loader.js';
 
 async function loadView(viewName) {
     const container = document.getElementById('main-container');
     const folder = viewName.toLowerCase();
 
-    // Use './' to look in the current project directory
+    // 1. Load the View
     const response = await fetch(`./${folder}/${folder}card.html`);
     container.innerHTML = await response.text();
 
-    loadComponent(`./${folder}/add_facilities_button.html`, 'button-container', () => {
-        const btn = document.getElementById('add-facilities-btn');
-        if (btn) {
-            btn.addEventListener('click', () => {
-                alert('Hello World!');
-            });
-        }
+    // 2. Find all components on the page and load them automatically
+    const components = container.querySelectorAll('[data-component]');
+    components.forEach(comp => {
+        const componentName = comp.getAttribute('data-component');
+        loadComponent(`./${folder}/${componentName}.html`, comp.id, () => {
+            // Logic for specific buttons can be handled here or inside the components
+            console.log(`Loaded: ${componentName}`);
+        });
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => loadView('Home'));
