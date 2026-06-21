@@ -1,16 +1,17 @@
-// Purpose: Load component into container | Location: /js/main.js
-async function loadComponent(url, elementId) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const text = await response.text();
-        document.getElementById(elementId).innerHTML = text;
-    } catch (error) {
-        console.error('Error loading component:', error);
-    }
+/* Purpose: Responsive Card Styling | Location: /styles/main.css */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
-// Ensure the code runs after the page is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('./Views/button.html', 'main-container');
-});
+.card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px auto; 
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
