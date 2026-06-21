@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- */
-/* Purpose: router.js | Location: Facilities-tasks-tracker/global_engine */
+/* Purpose: router.js | Location: Facilities-tasks-tracker/global_engine/router.js */
 /* -------------------------------------------------------------------------- */
 
 import { loadComponent } from './component_loader.js';
@@ -8,6 +8,7 @@ export async function loadView(viewName) {
     const container = document.getElementById('main-container');
     const folder = viewName.toLowerCase();
 
+    // Use absolute path from repository root
     const response = await fetch(`/Facilities-tasks-tracker/${folder}/${folder}card.html`);
     if (!response.ok) throw new Error(`Not Found: /Facilities-tasks-tracker/${folder}/${folder}card.html`);
     
@@ -20,5 +21,5 @@ export async function loadView(viewName) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Purpose: router.js | Location: Facilities-tasks-tracker/global_engine */
+/* Purpose: router.js | Location: Facilities-tasks-tracker/global_engine/router.js */
 /* -------------------------------------------------------------------------- */
