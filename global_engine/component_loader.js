@@ -1,12 +1,13 @@
-// File Name: component_loader.js
-// GitHub Path: Facilities-tasks-tracker/global_engine/component_loader.js
+/* -------------------------------------------------------------------------- */
+/* Purpose: component_loader.js | Location: Facilities-tasks-tracker/global_engine */
+/* -------------------------------------------------------------------------- */
 
 export async function loadComponent(path, targetElementId) {
     const targetElement = document.getElementById(targetElementId);
     if (!targetElement) return;
 
     try {
-        const response = await fetch(`../${path}`);
+        const response = await fetch(`/Facilities-tasks-tracker/${path}`);
         if (!response.ok) throw new Error(`Failed to load: ${path}`);
         
         const html = await response.text();
@@ -29,3 +30,7 @@ export async function loadComponent(path, targetElementId) {
         console.error(error);
     }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Purpose: component_loader.js | Location: Facilities-tasks-tracker/global_engine */
+/* -------------------------------------------------------------------------- */
