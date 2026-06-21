@@ -1,28 +1,62 @@
-<!-- ========================================== -->
-<!-- Purpose: Add Facilities | Location: home/add_facilities_button.html -->
-<!-- File Name: add_facilities_button.html -->
-<!-- GitHub Path: Facilities-tasks-tracker/home/add_facilities_button.html -->
-<!-- ========================================== -->
+/* -------------------------------------------------------------------------- */
+/* Purpose: create_facility_modal.html | Location: Facilities-tasks-tracker/home */
+/* -------------------------------------------------------------------------- */
 
-<button id="add-facilities-btn" class="primary-btn">Add Facilities</button>
-
-<div id="custom-modal" class="modal-overlay">
-    <div class="modal-content">
-        <p>This is my custom popup!</p>
-        <button id="close-modal-btn" class="primary-btn">Close</button>
+<div id="facility-modal-backdrop" class="facility-modal-backdrop" style="display: none;">
+    <div class="facility-modal">
+        <h3>Create New Facility</h3>
+        <label>Facility Name</label>
+        <input id="facility-name-input" type="text">
+        <label>Abbreviation</label>
+        <input id="facility-abbreviation-input" type="text">
+        <label>Address</label>
+        <input id="facility-address-input" type="text">
+        <label>Phone</label>
+        <input id="facility-phone-input" type="tel">
+        <label>Facility Image</label>
+        <input id="facility-image-input" type="file" accept="image/*" capture="environment">
+        <img id="facility-image-preview" style="width:100%;margin-top:10px;border-radius:8px;display:none;">
+        <div class="facility-modal-buttons">
+            <button id="btn-save-facility" class="btn-save-facility">Save</button>
+            <button id="btn-cancel-facility" class="btn-cancel-facility">Cancel</button>
+        </div>
+        <div id="facility-error" class="facility-error"></div>
     </div>
 </div>
 
-<script>
-    const modal = document.getElementById('custom-modal');
-    document.getElementById('add-facilities-btn').addEventListener('click', () => {
-        modal.style.display = 'block';
+<script type="module">
+    import { supabase } from '/Facilities-tasks-tracker/global_engine/supabaseClient.js';
+    
+    let imageFile = null;
+    const preview = document.getElementById('facility-image-preview');
+    
+    document.getElementById('facility-image-input').addEventListener('change', (e) => {
+        imageFile = e.target.files[0];
+        if (!imageFile) return;
+        const reader = new FileReader();
+        reader.onload = () => { preview.src = reader.result; preview.style.display = 'block'; };
+        reader.readAsDataURL(imageFile);
     });
-    document.getElementById('close-modal-btn').addEventListener('click', () => {
-        modal.style.display = 'none';
+
+    document.getElementById('btn-cancel-facility').addEventListener('click', () => {
+        document.getElementById('facility-modal-backdrop').style.display = 'none';
+    });
+
+    document.getElementById('btn-save-facility').addEventListener('click', async () => {
+        const numberName = document.getElementById('facility-name-input').value.trim();
+        const abbreviation = document.getElementById('facility-abbreviation-input').value.trim();
+        let image_url = '';
+
+        if (imageFile) {
+            const { data } = await supabase.storage.from('locations-images').upload(`${Date.now()}_${imageFile.name}`, imageFile);
+            if (data) image_url = supabase.storage.from('locations-images').getPublicUrl(data.path).data.publicUrl;
+        }
+
+        await supabase.from('facilities').insert([{ number_name: numberName, abbreviation, image_url }]);
+        location.reload();
     });
 </script>
 
-<!-- ========================================== -->
-<!--        End add_facilities_button.html      -->
-<!-- ========================================== -->
+/* -------------------------------------------------------------------------- */
+/* Purpose: create_facility_modal.html | Location: Facilities-tasks-tracker/home */
+/* -------------------------------------------------------------------------- */
