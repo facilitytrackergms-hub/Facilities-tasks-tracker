@@ -1,4 +1,9 @@
-async function loadComponent(path, targetElement) {
+// Purpose: Export Fix | Location: /global_engine/component_loader.js
+
+export async function loadComponent(path, targetElementId) {
+    const targetElement = document.getElementById(targetElementId);
+    if (!targetElement) return;
+
     try {
         const response = await fetch(`./${path}`);
         if (!response.ok) throw new Error(`Failed to load: ${path}`);
@@ -8,16 +13,14 @@ async function loadComponent(path, targetElement) {
 
         const scripts = targetElement.querySelectorAll('script');
         scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
             if (oldScript.src) {
-                const newScript = document.createElement('script');
                 newScript.src = oldScript.src;
-                newScript.async = false;
-                document.body.appendChild(newScript);
             } else {
-                const newScript = document.createElement('script');
                 newScript.textContent = `(function() { ${oldScript.textContent} })();`;
-                document.body.appendChild(newScript);
             }
+            newScript.async = false;
+            document.body.appendChild(newScript);
         });
     } catch (error) {
         console.error(error);
