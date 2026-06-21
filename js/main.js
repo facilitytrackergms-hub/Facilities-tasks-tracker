@@ -1,9 +1,11 @@
-// Purpose: Load components into the main container | Location: /js/main.js
+// Purpose: Load component | Location: /js/main.js
 async function loadComponent(url, elementId) {
-    const response = await fetch(url);
-    const text = await response.text();
-    document.getElementById(elementId).innerHTML = text;
+    try {
+        // Use a leading slash to ensure it looks at the root of your repository
+        const response = await fetch('/Views/button.html'); 
+        const text = await response.text();
+        document.getElementById(elementId).innerHTML = text;
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
-
-// Example: This will inject a file named 'button.html' into your main-container
-loadComponent('./Views/button.html', 'main-container');
